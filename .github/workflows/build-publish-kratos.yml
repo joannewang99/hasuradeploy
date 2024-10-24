@@ -17,7 +17,7 @@ jobs:
 
       # Image Base name
       - name: "Set Image Base Name"
-        run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/faktenforum-kratos-migrate" >> $GITHUB_ENV
+        run: echo "IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/kratos-migrate" >> $GITHUB_ENV
 
       # Set tags for the main branch
       - name: Set Production Tags
