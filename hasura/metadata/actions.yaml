@@ -1,0 +1,61 @@
+actions:
+  - name: allUsersWithRoles
+    definition:
+      kind: ""
+      handler: '{{HASURA_WEBHOOKS_BASE_URL}}/all-users-with-roles'
+      headers:
+        - name: x-api-key
+          value_from_env: HASURA_WEBHOOKS_API_KEY
+    permissions:
+      - role: administrator
+    comment: Get all users with their assigned role
+  - name: updateUserRole
+    definition:
+      kind: synchronous
+      handler: '{{HASURA_WEBHOOKS_BASE_URL}}/update-user-role'
+      headers:
+        - name: x-api-key
+          value_from_env: HASURA_WEBHOOKS_API_KEY
+      request_transform:
+        body:
+          action: transform
+          template: '{{$body.input}}'
+        template_engine: Kriti
+        version: 2
+    permissions:
+      - role: administrator
+    comment: Update user role
+custom_types:
+  enums:
+    - name: Language
+      values:
+        - description: null
+          is_deprecated: null
+          value: en
+        - description: null
+          is_deprecated: null
+          value: de
+    - name: UserRole
+      values:
+        - description: null
+          is_deprecated: null
+          value: aspirant
+        - description: null
+          is_deprecated: null
+          value: junior
+        - description: null
+          is_deprecated: null
+          value: senior
+        - description: null
+          is_deprecated: null
+          value: moderator
+        - description: null
+          is_deprecated: null
+          value: editor
+        - description: null
+          is_deprecated: null
+          value: administrator
+  input_objects: []
+  objects:
+    - name: UserWithRole
+  scalars: []

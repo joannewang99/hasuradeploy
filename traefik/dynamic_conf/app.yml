@@ -1,0 +1,13 @@
+http:
+  routers:
+    app:
+      entryPoints:
+        - web
+      rule: host(`app.localhost`)
+      service: app
+
+  services:
+    app:
+      loadBalancer:
+        servers:
+          - url: http://host.docker.internal:4000

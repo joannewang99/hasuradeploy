@@ -1,0 +1,272 @@
+table:
+  name: user
+  schema: public
+object_relationships:
+  - name: file
+    using:
+      foreign_key_constraint_on: profile_image
+array_relationships:
+  - name: claimResourcesByUpdatedBy
+    using:
+      foreign_key_constraint_on:
+        column: updated_by
+        table:
+          name: origin
+          schema: public
+  - name: claims
+    using:
+      foreign_key_constraint_on:
+        column: created_by
+        table:
+          name: claim
+          schema: public
+  - name: claimsByUpdatedBy
+    using:
+      foreign_key_constraint_on:
+        column: updated_by
+        table:
+          name: claim
+          schema: public
+  - name: comments
+    using:
+      foreign_key_constraint_on:
+        column: created_by
+        table:
+          name: comment
+          schema: public
+  - name: commentsByUpdatedBy
+    using:
+      foreign_key_constraint_on:
+        column: updated_by
+        table:
+          name: comment
+          schema: public
+  - name: factResourcesByUpdatedBy
+    using:
+      foreign_key_constraint_on:
+        column: updated_by
+        table:
+          name: source
+          schema: public
+  - name: facts
+    using:
+      foreign_key_constraint_on:
+        column: created_by
+        table:
+          name: fact
+          schema: public
+  - name: factsByUpdatedBy
+    using:
+      foreign_key_constraint_on:
+        column: updated_by
+        table:
+          name: fact
+          schema: public
+  - name: files
+    using:
+      foreign_key_constraint_on:
+        column: created_by
+        table:
+          name: file
+          schema: public
+  - name: filesByUpdatedBy
+    using:
+      foreign_key_constraint_on:
+        column: updated_by
+        table:
+          name: file
+          schema: public
+  - name: origins
+    using:
+      foreign_key_constraint_on:
+        column: created_by
+        table:
+          name: origin
+          schema: public
+  - name: sources
+    using:
+      foreign_key_constraint_on:
+        column: created_by
+        table:
+          name: source
+          schema: public
+  - name: userHistories
+    using:
+      foreign_key_constraint_on:
+        column: id
+        table:
+          name: user_history
+          schema: public
+select_permissions:
+  - role: administrator
+    permission:
+      columns:
+        - bio
+        - email
+        - first_name
+        - last_name
+        - mobile_number
+        - pronouns
+        - username
+        - created_at
+        - updated_at
+        - sys_period
+        - id
+        - profile_image
+      filter: {}
+    comment: ""
+  - role: aspirant
+    permission:
+      columns:
+        - id
+      filter: {}
+    comment: ""
+  - role: editor
+    permission:
+      columns:
+        - bio
+        - email
+        - first_name
+        - last_name
+        - mobile_number
+        - pronouns
+        - username
+        - created_at
+        - updated_at
+        - sys_period
+        - id
+        - profile_image
+      filter: {}
+    comment: ""
+  - role: junior
+    permission:
+      columns:
+        - bio
+        - created_at
+        - id
+        - mobile_number
+        - profile_image
+        - pronouns
+        - sys_period
+        - updated_at
+        - username
+      filter: {}
+    comment: ""
+  - role: moderator
+    permission:
+      columns:
+        - bio
+        - email
+        - first_name
+        - last_name
+        - mobile_number
+        - pronouns
+        - username
+        - created_at
+        - updated_at
+        - sys_period
+        - id
+        - profile_image
+      filter: {}
+    comment: ""
+  - role: senior
+    permission:
+      columns:
+        - bio
+        - created_at
+        - id
+        - profile_image
+        - pronouns
+        - sys_period
+        - updated_at
+        - username
+      filter: {}
+      query_root_fields:
+        - select_by_pk
+      subscription_root_fields: []
+    comment: ""
+update_permissions:
+  - role: administrator
+    permission:
+      columns:
+        - bio
+        - created_at
+        - first_name
+        - last_name
+        - mobile_number
+        - profile_image
+        - pronouns
+        - updated_at
+      filter: {}
+      check: null
+    comment: ""
+  - role: aspirant
+    permission:
+      columns:
+        - bio
+        - first_name
+        - last_name
+        - mobile_number
+        - profile_image
+        - pronouns
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: {}
+    comment: ""
+  - role: editor
+    permission:
+      columns:
+        - bio
+        - created_at
+        - first_name
+        - last_name
+        - mobile_number
+        - profile_image
+        - pronouns
+        - updated_at
+      filter: {}
+      check: null
+    comment: ""
+  - role: junior
+    permission:
+      columns:
+        - bio
+        - first_name
+        - last_name
+        - mobile_number
+        - profile_image
+        - pronouns
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: {}
+    comment: ""
+  - role: moderator
+    permission:
+      columns:
+        - bio
+        - created_at
+        - first_name
+        - last_name
+        - mobile_number
+        - profile_image
+        - pronouns
+        - updated_at
+      filter: {}
+      check: null
+    comment: ""
+  - role: senior
+    permission:
+      columns:
+        - bio
+        - first_name
+        - last_name
+        - mobile_number
+        - profile_image
+        - pronouns
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check: {}
+    comment: ""

@@ -1,0 +1,7 @@
+table:
+  name: fact_history
+  schema: public
+object_relationships:
+  - name: fact
+    using:
+      foreign_key_constraint_on: id

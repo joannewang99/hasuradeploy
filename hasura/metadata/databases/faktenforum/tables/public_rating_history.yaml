@@ -1,0 +1,7 @@
+table:
+  name: rating_history
+  schema: public
+object_relationships:
+  - name: rating
+    using:
+      foreign_key_constraint_on: id

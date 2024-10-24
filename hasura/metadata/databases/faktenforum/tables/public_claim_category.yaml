@@ -1,0 +1,167 @@
+table:
+  name: claim_category
+  schema: public
+object_relationships:
+  - name: category
+    using:
+      foreign_key_constraint_on: category_name
+  - name: claim
+    using:
+      foreign_key_constraint_on: claim_id
+  - name: user
+    using:
+      foreign_key_constraint_on: created_by
+  - name: userByUpdatedBy
+    using:
+      foreign_key_constraint_on: updated_by
+insert_permissions:
+  - role: administrator
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-User-Id
+      columns:
+        - category_name
+        - created_at
+        - updated_at
+        - sys_period
+        - claim_id
+        - created_by
+        - id
+        - updated_by
+    comment: ""
+  - role: editor
+    permission:
+      check: {}
+      columns:
+        - category_name
+        - created_at
+        - updated_at
+        - sys_period
+        - claim_id
+        - created_by
+        - id
+        - updated_by
+    comment: ""
+  - role: moderator
+    permission:
+      check:
+        claim:
+          internal:
+            _eq: false
+      set:
+        created_by: x-hasura-User-Id
+      columns:
+        - category_name
+        - claim_id
+    comment: ""
+  - role: senior
+    permission:
+      check:
+        claim:
+          internal:
+            _eq: false
+      set:
+        created_by: x-hasura-User-Id
+      columns:
+        - category_name
+        - claim_id
+    comment: ""
+select_permissions:
+  - role: administrator
+    permission:
+      columns:
+        - category_name
+        - created_at
+        - updated_at
+        - sys_period
+        - claim_id
+        - created_by
+        - id
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: editor
+    permission:
+      columns:
+        - category_name
+        - created_at
+        - updated_at
+        - sys_period
+        - claim_id
+        - created_by
+        - id
+        - updated_by
+      filter: {}
+    comment: ""
+  - role: junior
+    permission:
+      columns:
+        - category_name
+        - created_at
+        - updated_at
+        - sys_period
+        - claim_id
+        - created_by
+        - id
+        - updated_by
+      filter:
+        claim:
+          internal:
+            _eq: false
+      allow_aggregations: true
+    comment: ""
+  - role: moderator
+    permission:
+      columns:
+        - category_name
+        - created_at
+        - updated_at
+        - sys_period
+        - claim_id
+        - created_by
+        - id
+        - updated_by
+      filter:
+        claim:
+          internal:
+            _eq: false
+      allow_aggregations: true
+    comment: ""
+  - role: senior
+    permission:
+      columns:
+        - category_name
+        - created_at
+        - updated_at
+        - sys_period
+        - claim_id
+        - created_by
+        - id
+        - updated_by
+      filter:
+        claim:
+          internal:
+            _eq: false
+      allow_aggregations: true
+    comment: ""
+delete_permissions:
+  - role: administrator
+    permission:
+      filter: {}
+    comment: ""
+  - role: moderator
+    permission:
+      filter:
+        claim:
+          internal:
+            _eq: false
+    comment: ""
+  - role: senior
+    permission:
+      filter:
+        claim:
+          internal:
+            _eq: false
+    comment: ""

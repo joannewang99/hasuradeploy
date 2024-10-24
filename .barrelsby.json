@@ -1,0 +1,17 @@
+{
+  "directory": [
+    "./src/controllers/api/v1",
+    "./src/controllers/pages",
+    "./src/services",
+    "./src/decorators",
+    "./src/middlewares",
+    "./src/models",
+    "./src/utils"
+  ],
+  "exclude": [
+    "__mock__",
+    "__mocks__",
+    ".spec.ts"
+  ],
+  "delete": true
+}

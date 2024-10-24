@@ -1,0 +1,223 @@
+table:
+  name: fact
+  schema: public
+object_relationships:
+  - name: claim
+    using:
+      foreign_key_constraint_on: claim_id
+  - name: createdByUser
+    using:
+      foreign_key_constraint_on: created_by
+  - name: updatedByUser
+    using:
+      foreign_key_constraint_on: updated_by
+array_relationships:
+  - name: factHistories
+    using:
+      foreign_key_constraint_on:
+        column: id
+        table:
+          name: fact_history
+          schema: public
+  - name: sources
+    using:
+      foreign_key_constraint_on:
+        column: fact_id
+        table:
+          name: source
+          schema: public
+insert_permissions:
+  - role: administrator
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-User-Id
+      columns:
+        - claim_id
+        - created_by
+        - text
+    comment: ""
+  - role: editor
+    permission:
+      check: {}
+      set:
+        created_by: x-hasura-User-Id
+      columns:
+        - claim_id
+        - created_by
+        - text
+    comment: ""
+  - role: moderator
+    permission:
+      check:
+        claim:
+          internal:
+            _eq: false
+      set:
+        created_by: x-hasura-User-Id
+      columns:
+        - claim_id
+        - created_by
+        - text
+    comment: ""
+  - role: senior
+    permission:
+      check:
+        claim:
+          internal:
+            _eq: false
+      set:
+        created_by: x-hasura-User-Id
+      columns:
+        - claim_id
+        - created_by
+        - text
+    comment: ""
+select_permissions:
+  - role: administrator
+    permission:
+      columns:
+        - claim_id
+        - created_at
+        - created_by
+        - id
+        - index
+        - sys_period
+        - text
+        - updated_at
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: editor
+    permission:
+      columns:
+        - claim_id
+        - created_at
+        - created_by
+        - id
+        - index
+        - sys_period
+        - text
+        - updated_at
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+      query_root_fields: []
+      subscription_root_fields: []
+    comment: ""
+  - role: junior
+    permission:
+      columns:
+        - claim_id
+        - created_at
+        - created_by
+        - id
+        - index
+        - sys_period
+        - text
+        - updated_at
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+      query_root_fields: []
+      subscription_root_fields: []
+    comment: ""
+  - role: moderator
+    permission:
+      columns:
+        - claim_id
+        - created_at
+        - created_by
+        - id
+        - index
+        - sys_period
+        - text
+        - updated_at
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+      query_root_fields: []
+      subscription_root_fields: []
+    comment: ""
+  - role: senior
+    permission:
+      columns:
+        - claim_id
+        - created_at
+        - created_by
+        - id
+        - index
+        - sys_period
+        - text
+        - updated_at
+        - updated_by
+      filter: {}
+      allow_aggregations: true
+      query_root_fields: []
+      subscription_root_fields: []
+    comment: ""
+update_permissions:
+  - role: administrator
+    permission:
+      columns:
+        - text
+        - updated_by
+      filter: {}
+      check: null
+      set:
+        updated_by: x-hasura-User-Id
+    comment: ""
+  - role: editor
+    permission:
+      columns:
+        - text
+        - updated_by
+      filter: {}
+      check: null
+      set:
+        updated_by: x-hasura-User-Id
+    comment: ""
+  - role: moderator
+    permission:
+      columns:
+        - text
+        - updated_by
+      filter: {}
+      check: null
+      set:
+        updated_by: x-hasura-User-Id
+    comment: ""
+  - role: senior
+    permission:
+      columns:
+        - text
+        - updated_by
+      filter: {}
+      check: null
+      set:
+        updated_by: x-hasura-User-Id
+    comment: ""
+delete_permissions:
+  - role: administrator
+    permission:
+      filter: {}
+    comment: ""
+  - role: editor
+    permission:
+      filter: {}
+    comment: ""
+  - role: moderator
+    permission:
+      filter:
+        claim:
+          internal:
+            _eq: false
+    comment: ""
+  - role: senior
+    permission:
+      filter:
+        claim:
+          internal:
+            _eq: false
+    comment: ""

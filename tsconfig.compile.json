@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "prisma",
+    "minio",
+    "src/__tests__",
+    "scripts",
+    "dist",
+    "coverage",
+    "src/__mocks__",
+    "src/__generated__"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "declaration": true,
+    "noResolve": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "noEmit": false,
+    "emitDeclarationOnly": false,
+    "inlineSources": true,
+    "skipLibCheck": true
+  }
+}

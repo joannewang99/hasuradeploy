@@ -1,0 +1,13 @@
+http:
+  routers:
+    landing:
+      entryPoints:
+        - web
+      rule: host(`localhost`)
+      service: landing
+
+  services:
+    landing:
+      loadBalancer:
+        servers:
+          - url: http://host.docker.internal:3000
