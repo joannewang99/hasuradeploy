@@ -1,20 +1,17 @@
-name: FF-Deploy-Production
+name: Basic deploy
 
 on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  EC2-Deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Print portainer url
-        run: echo "${{ vars.PROD_PORTAINER_URL }}"
-      - name: Deploy to Production Environment
-        if: github.ref == 'refs/heads/production'
-        uses: faktenforum/portami@main
+      - id: deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v1.0.1
         with:
-          endpoint: ${{ vars.PROD_PORTAINER_URL }}
-          access_token: ${{ secrets.PROD_PORTAINER_ACCESSTOKEN }}
-          stack_name: "${{ vars.PROD_BACKEND_STACK_NAME }}"
-          prune: true
-          pull: true
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_default_region: us-east-1
+
+          aws_elb_app_port: 8080 # This should match the docker exposed port. Defaults to 3000.
