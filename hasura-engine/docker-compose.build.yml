@@ -1,0 +1,19 @@
+services:
+  graphql-engine:
+    image: hasura/graphql-engine:v2.36.8
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@ec2-3-84-220-59.compute-1.amazonaws.com:${POSTGRES_PORT}/hasura
+      PGDATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@ec2-3-84-220-59.compute-1.amazonaws.com:${POSTGRES_PORT}/faktenforum
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_READ_ONLY_MODE: "false"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+    #  HASURA_GRAPHQL_METADATA_DEFAULTS: '{"backend_configs":{"dataconnector":{"athena":{"uri":"http://data-connector-agent:8081/api/v1/athena"},"mariadb":{"uri":"http://data-connector-agent:8081/api/v1/mariadb"},"mysql8":{"uri":"http://data-connector-agent:8081/api/v1/mysql"},"oracle":{"uri":"http://data-connector-agent:8081/api/v1/oracle"},"snowflake":{"uri":"http://data-connector-agent:8081/api/v1/snowflake"}}}}'
+    # depends_on:
+    #   data-connector-agent:
+    #     condition: service_healthy
+
+
