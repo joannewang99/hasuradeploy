@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./hasura-engine
-          file: ./hasura-engine/docker-compose.build.yml
+          file: ./hasura-engine/Dockerfile.hasura-engine
           push: true
           platforms: linux/amd64 #, linux/arm64
           tags: ${{ env.TAGS }}
